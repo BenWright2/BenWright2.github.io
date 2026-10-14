@@ -22,11 +22,11 @@ function updateParallax(){
   for(const el of inner){
     const r=el.getBoundingClientRect();
     if(r.bottom < -100 || r.top > vh+100) continue;
-    const speed=Number(el.dataset.speed||.1);
-    const scale=Number(el.dataset.scale||1.2);
-    const buffer=r.height*(scale-1)/2;            // how far the image can move before an edge shows
-    const center=(r.top+r.height/2-vh/2);
-    const shift=Math.max(-buffer,Math.min(buffer,-center*speed));
+    const scale=Number(el.dataset.scale||1.4);
+    const buffer=r.height*(scale-1)/2;                 // max travel before an edge could show
+    // 0 when the frame enters at the bottom of the screen, 1 when it leaves at the top
+    const p=Math.max(0,Math.min(1,(vh-r.top)/(vh+r.height)));
+    const shift=(p-.5)*2*buffer;                       // spreads full travel across the whole scroll
     el.querySelector('img').style.transform=`translate3d(0,${shift.toFixed(1)}px,0) scale(${scale})`;
   }
   ticking=false;
