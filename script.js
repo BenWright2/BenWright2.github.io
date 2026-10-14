@@ -16,7 +16,7 @@ function updateParallax(){
     const center=(r.top+r.height/2-vh/2);
     let shift=-center*speed;
     // .parallax-lock: the whole frame drifts, but never moves down from its resting spot,
-    // so it stays attached to the top edge of its section (no gap).
+    // so it stays attached to its section edge / stops just above its caption (no gap, no overlap).
     if(el.classList.contains('parallax-lock')) shift=Math.min(shift,0);
     el.style.transform=`translate3d(0,${shift.toFixed(1)}px,0)`;
   }
