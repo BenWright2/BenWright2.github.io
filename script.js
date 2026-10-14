@@ -4,6 +4,8 @@ document.querySelectorAll('.links a').forEach(a=>a.addEventListener('click',()=>
 document.getElementById('year').textContent=new Date().getFullYear();
 // Gentle scroll-linked image drift. CSS transforms only; disabled for reduced-motion users.
 const layers=[...document.querySelectorAll('.parallax')];
+// "Inner" parallax: the frame stays put, only the image drifts inside it (no gaps possible).
+const inner=[...document.querySelectorAll('.parallax-inner')];
 const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 let ticking=false;
 function updateParallax(){
@@ -16,6 +18,16 @@ function updateParallax(){
     const center=(r.top+r.height/2-vh/2);
     const shift=-center*speed;
     el.style.transform=`translate3d(0,${shift.toFixed(1)}px,0)`;
+  }
+  for(const el of inner){
+    const r=el.getBoundingClientRect();
+    if(r.bottom < -100 || r.top > vh+100) continue;
+    const speed=Number(el.dataset.speed||.1);
+    const scale=Number(el.dataset.scale||1.2);
+    const buffer=r.height*(scale-1)/2;            // how far the image can move before an edge shows
+    const center=(r.top+r.height/2-vh/2);
+    const shift=Math.max(-buffer,Math.min(buffer,-center*speed));
+    el.querySelector('img').style.transform=`translate3d(0,${shift.toFixed(1)}px,0) scale(${scale})`;
   }
   ticking=false;
 }
