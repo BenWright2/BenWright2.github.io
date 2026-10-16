@@ -29,16 +29,17 @@ window.addEventListener('resize',updateParallax);updateParallax();
 // Each row clones its photo set enough times to always fill the screen, then slides left
 // by exactly one set's width, so the loop restarts invisibly.
 // Row speed comes from the row's data-speed attribute (pixels per second).
+// The strip always runs; for visitors with "reduce motion" on, it just runs slower.
 const marqueeTracks=[...document.querySelectorAll('.marquee-track')];
+const marqueeSpeedFactor=reduce?0.6:1;
 function buildMarquee(){
-  if(reduce)return;
   for(const track of marqueeTracks){
     const original=track.querySelector('.marquee-set:not(.clone)');
     if(!original)continue;
     track.querySelectorAll('.marquee-set.clone').forEach(c=>c.remove());
     const w=original.offsetWidth;
     if(!w)continue;
-    const speed=Number(track.dataset.speed||40);
+    const speed=Number(track.dataset.speed||40)*marqueeSpeedFactor;
     const copies=Math.ceil(window.innerWidth/w)+1;
     for(let i=0;i<copies;i++){
       const c=original.cloneNode(true);
@@ -47,10 +48,17 @@ function buildMarquee(){
       c.querySelectorAll('img').forEach(img=>img.alt='');
       track.appendChild(c);
     }
-    track.style.setProperty('--shift',w+'px');
+    track.style.setProperty('--shift',(-w)+'px');
     track.style.setProperty('--dur',(w/speed).toFixed(1)+'s');
   }
 }
 buildMarquee();
-let marqueeTimer;
-window.addEventListener('resize',()=>{clearTimeout(marqueeTimer);marqueeTimer=setTimeout(buildMarquee,200);});
+// Rebuild once everything (fonts, images) has loaded, in case widths shifted.
+window.addEventListener('load',buildMarquee);
+// Only rebuild when the screen WIDTH changes (phones fire "resize" while scrolling as the address bar hides).
+let lastW=window.innerWidth,marqueeTimer;
+window.addEventListener('resize',()=>{
+  if(window.innerWidth===lastW)return;
+  lastW=window.innerWidth;
+  clearTimeout(marqueeTimer);marqueeTimer=setTimeout(buildMarquee,200);
+});
