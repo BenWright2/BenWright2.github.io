@@ -24,3 +24,33 @@ function updateParallax(){
 }
 window.addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(updateParallax);ticking=true;}},{passive:true});
 window.addEventListener('resize',updateParallax);updateParallax();
+
+// Seamless auto-scrolling photo strips (works for any number of rows).
+// Each row clones its photo set enough times to always fill the screen, then slides left
+// by exactly one set's width, so the loop restarts invisibly.
+// Row speed comes from the row's data-speed attribute (pixels per second).
+const marqueeTracks=[...document.querySelectorAll('.marquee-track')];
+function buildMarquee(){
+  if(reduce)return;
+  for(const track of marqueeTracks){
+    const original=track.querySelector('.marquee-set:not(.clone)');
+    if(!original)continue;
+    track.querySelectorAll('.marquee-set.clone').forEach(c=>c.remove());
+    const w=original.offsetWidth;
+    if(!w)continue;
+    const speed=Number(track.dataset.speed||40);
+    const copies=Math.ceil(window.innerWidth/w)+1;
+    for(let i=0;i<copies;i++){
+      const c=original.cloneNode(true);
+      c.classList.add('clone');
+      c.setAttribute('aria-hidden','true');
+      c.querySelectorAll('img').forEach(img=>img.alt='');
+      track.appendChild(c);
+    }
+    track.style.setProperty('--shift',w+'px');
+    track.style.setProperty('--dur',(w/speed).toFixed(1)+'s');
+  }
+}
+buildMarquee();
+let marqueeTimer;
+window.addEventListener('resize',()=>{clearTimeout(marqueeTimer);marqueeTimer=setTimeout(buildMarquee,200);});
