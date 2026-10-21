@@ -91,10 +91,12 @@ footer::before{
 }
 
 /* ABOUT SECTION: tan background with a thin frame and two flower sprays.
-   --u is the display size of one pixel of the original frame artwork, so the
-   frame, the flowers and the clearance around the content all scale together. */
+   --ut / --ub are the display size of one pixel of the original artwork for the
+   top-right and bottom-left sprays, so frame lines and flowers always line up. */
 .about-block{
     --u:clamp(.5px,.06vw,.85px);
+    --ut:var(--u);
+    --ub:var(--u);
     --fi:calc(var(--u)*60 + 6px);
     --line:#3a3733;
     --lw:max(1px,calc(var(--u)*2));
@@ -113,10 +115,10 @@ footer::before{
     pointer-events:none;
     z-index:0;
     background:
-        linear-gradient(var(--line),var(--line)) left top / calc(100% - var(--u)*39.5) var(--lw) no-repeat,
-        linear-gradient(var(--line),var(--line)) left top / var(--lw) calc(var(--u)*231.5) no-repeat,
-        linear-gradient(var(--line),var(--line)) right bottom / calc(100% - var(--u)*20) var(--lw) no-repeat,
-        linear-gradient(var(--line),var(--line)) right bottom / var(--lw) calc(100% - var(--u)*284.5) no-repeat;
+        linear-gradient(var(--line),var(--line)) left top / calc(100% - var(--ut)*39.5) var(--lw) no-repeat,
+        linear-gradient(var(--line),var(--line)) left top / var(--lw) calc(100% - var(--ub)*290.5) no-repeat,
+        linear-gradient(var(--line),var(--line)) right bottom / calc(100% - var(--ub)*20) var(--lw) no-repeat,
+        linear-gradient(var(--line),var(--line)) right bottom / var(--lw) calc(100% - var(--ut)*284.5) no-repeat;
 }
 
 /* the two flower sprays: top right and bottom left of the frame */
@@ -127,8 +129,8 @@ footer::before{
     pointer-events:none;
     z-index:0;
     background:
-        url("frame-flowers-top.png") right calc(var(--fi) - var(--u)*30.5) top calc(var(--fi) - var(--u)*13.5) / calc(var(--u)*164) auto no-repeat,
-        url("frame-flowers-bottom.png") left calc(var(--fi) - var(--u)*51) bottom calc(var(--fi) - var(--u)*8.5) / calc(var(--u)*158) auto no-repeat;
+        url("frame-flowers-top.png") right calc(var(--fi) - var(--ut)*30.5) top calc(var(--fi) - var(--ut)*13.5) / calc(var(--ut)*164) auto no-repeat,
+        url("frame-flowers-bottom.png") left calc(var(--fi) - var(--ub)*51) bottom calc(var(--fi) - var(--ub)*8.5) / calc(var(--ub)*158) auto no-repeat;
 }
 
 /* ABOUT CONTENT */
@@ -396,9 +398,13 @@ footer>div{display:flex;gap:20px}
     .hero h1{font-size:32px}
     .hero-center p{font-size:14px}
 
-    /* flowers sit above and below the content, so leave room for them */
+    /* Phone: keep the section its original size. The top flowers sit in the free
+       space to the right of the photo; the bottom ones in the bottom padding. */
     .about-block{
-        padding:calc(var(--fi) + var(--u)*300 + 24px) calc(var(--fi) + 24px) calc(var(--fi) + var(--u)*304 + 24px)
+        --fi:14px;
+        --ut:.40px;
+        --ub:.24px;
+        padding:75px 8% 85px
     }
     .about-inner{
         grid-template-columns:1fr;
