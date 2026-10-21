@@ -90,30 +90,45 @@ footer::before{
     mask-repeat:repeat
 }
 
-/* ABOUT SECTION */
+/* ABOUT SECTION: tan background with a thin frame and two flower sprays.
+   --u is the display size of one pixel of the original frame artwork, so the
+   frame, the flowers and the clearance around the content all scale together. */
 .about-block{
+    --u:clamp(.5px,.06vw,.85px);
+    --fi:calc(var(--u)*60 + 6px);
+    --line:#3a3733;
+    --lw:max(1px,calc(var(--u)*2));
     background:#d6b587;
-    padding:105px 10% 110px;
+    padding:calc(var(--fi) + 60px) max(10%,calc(var(--fi) + var(--u)*134 + 30px)) calc(var(--fi) + 125px);
     position:relative;
     overflow:hidden;
     isolation:isolate;
 }
 
-/* ABOUT FLORAL IMAGE
-   The white in the PNG disappears into the tan via multiply,
-   leaving only the teal + orange line drawings. */
+/* the frame lines (each side stops short where a flower spray crosses it) */
 .about-block::before{
     content:"";
     position:absolute;
-    inset:0;
-    background-image:url("about-floral.png");
-    background-repeat:no-repeat;
-    background-position:center center;
-    background-size:cover;
-    mix-blend-mode:multiply;
-    opacity:.8;
+    inset:var(--fi);
     pointer-events:none;
     z-index:0;
+    background:
+        linear-gradient(var(--line),var(--line)) left top / calc(100% - var(--u)*39.5) var(--lw) no-repeat,
+        linear-gradient(var(--line),var(--line)) left top / var(--lw) calc(var(--u)*231.5) no-repeat,
+        linear-gradient(var(--line),var(--line)) right bottom / calc(100% - var(--u)*20) var(--lw) no-repeat,
+        linear-gradient(var(--line),var(--line)) right bottom / var(--lw) calc(100% - var(--u)*284.5) no-repeat;
+}
+
+/* the two flower sprays: top right and bottom left of the frame */
+.about-block::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    z-index:0;
+    background:
+        url("frame-flowers-top.png") right calc(var(--fi) - var(--u)*30.5) top calc(var(--fi) - var(--u)*13.5) / calc(var(--u)*164) auto no-repeat,
+        url("frame-flowers-bottom.png") left calc(var(--fi) - var(--u)*51) bottom calc(var(--fi) - var(--u)*8.5) / calc(var(--u)*158) auto no-repeat;
 }
 
 /* ABOUT CONTENT */
@@ -348,30 +363,8 @@ footer p,footer>div,footer>small{
 }
 footer>div{display:flex;gap:20px}
 
-/* FALLING PETALS
-   "section .petal" is more specific than ".story>*", so petals stay absolutely positioned. */
-section .petal{
-    position:absolute;
-    z-index:3;
-    height:auto;
-    object-fit:contain;
-    pointer-events:none;
-    will-change:transform;
-    opacity:.9
-}
-
 /* MOBILE */
 @media(max-width:700px){
-    /* Phone only: all the right-hand flowers and petals, hanging from the top right corner. */
-    .about-block::before{
-        inset:0 0 auto 0;
-        height:400px;
-        background-image:url("about-floral-corner.png");
-        background-size:300px auto;
-        background-position:right top;
-        opacity:.9
-    }
-
     footer::before{
         -webkit-mask-size:230px;
         mask-size:230px
@@ -403,7 +396,10 @@ section .petal{
     .hero h1{font-size:32px}
     .hero-center p{font-size:14px}
 
-    .about-block{padding:170px 8% 85px}
+    /* flowers sit above and below the content, so leave room for them */
+    .about-block{
+        padding:calc(var(--fi) + var(--u)*300 + 24px) calc(var(--fi) + 24px) calc(var(--fi) + var(--u)*304 + 24px)
+    }
     .about-inner{
         grid-template-columns:1fr;
         gap:95px
