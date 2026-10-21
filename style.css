@@ -362,26 +362,14 @@ section .petal{
 
 /* MOBILE */
 @media(max-width:700px){
-    /* Phone only: instead of one huge, blurry, cropped image, show the
-       hanging flowers at the top and the tulips at the bottom. */
+    /* Phone only: all the right-hand flowers and petals, hanging from the top right corner. */
     .about-block::before{
         inset:0 0 auto 0;
-        height:340px;
-        background-size:170% auto;
-        background-position:right top
-    }
-    .about-block::after{
-        content:"";
-        position:absolute;
-        left:0;
-        right:0;
-        bottom:0;
-        height:340px;
-        background:url("about-floral.png") left bottom/170% auto no-repeat;
-        mix-blend-mode:multiply;
-        opacity:.8;
-        pointer-events:none;
-        z-index:0
+        height:300px;
+        background-image:url("about-floral-corner.png");
+        background-size:230px auto;
+        background-position:right top;
+        opacity:.9
     }
 
     footer::before{
@@ -415,7 +403,7 @@ section .petal{
     .hero h1{font-size:32px}
     .hero-center p{font-size:14px}
 
-    .about-block{padding:75px 8% 85px}
+    .about-block{padding:225px 8% 85px}
     .about-inner{
         grid-template-columns:1fr;
         gap:95px
