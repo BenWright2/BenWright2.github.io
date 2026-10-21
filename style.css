@@ -362,9 +362,26 @@ section .petal{
 
 /* MOBILE */
 @media(max-width:700px){
+    /* Phone only: instead of one huge, blurry, cropped image, show the
+       hanging flowers at the top and the tulips at the bottom. */
     .about-block::before{
-        background-size:cover;
-        background-position:25% center
+        inset:0 0 auto 0;
+        height:340px;
+        background-size:170% auto;
+        background-position:right top
+    }
+    .about-block::after{
+        content:"";
+        position:absolute;
+        left:0;
+        right:0;
+        bottom:0;
+        height:340px;
+        background:url("about-floral.png") left bottom/170% auto no-repeat;
+        mix-blend-mode:multiply;
+        opacity:.8;
+        pointer-events:none;
+        z-index:0
     }
 
     footer::before{
