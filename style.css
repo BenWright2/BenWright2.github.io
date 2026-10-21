@@ -365,9 +365,9 @@ section .petal{
     /* Phone only: all the right-hand flowers and petals, hanging from the top right corner. */
     .about-block::before{
         inset:0 0 auto 0;
-        height:300px;
+        height:400px;
         background-image:url("about-floral-corner.png");
-        background-size:230px auto;
+        background-size:300px auto;
         background-position:right top;
         opacity:.9
     }
@@ -403,7 +403,7 @@ section .petal{
     .hero h1{font-size:32px}
     .hero-center p{font-size:14px}
 
-    .about-block{padding:225px 8% 85px}
+    .about-block{padding:170px 8% 85px}
     .about-inner{
         grid-template-columns:1fr;
         gap:95px
