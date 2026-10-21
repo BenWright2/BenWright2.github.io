@@ -1,15 +1,4 @@
-:root{
-    --tan:#d6b587;
-    --blue:#b5c0c4;
-    --cream:#f6f1e9;
-    --ink:#4b4944;
-    --white:#fff;
-    --serif:'Playfair Display',Georgia,serif;
-    --sans:'DM Sans',Arial,sans-serif;
-    --script:'Great Vibes','Brush Script MT',cursive;
-
-    --flowers:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 360 360' width='360' height='360'%3E%3Cdefs%3E%3Cg id='f' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M-14,-6C-18,-18 -8,-26 0,-22C4,-28 16,-26 16,-14C16,-4 8,4 0,6C-8,6 -13,2 -14,-6Z'/%3E%3Cpath d='M0,-22C-4,-14 -2,-4 0,6'/%3E%3Cpath d='M0,6C6,24 4,44 -8,64'/%3E%3C/g%3E%3Cpath id='l' d='M0,0C10,-14 26,-22 40,-24C34,-10 18,0 0,0Z' fill='black' stroke='black' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/defs%3E%3Cuse href='%23f' transform='translate(70,70) rotate(-20)'/%3E%3Cuse href='%23f' transform='translate(240,50) rotate(25) scale(.9)'/%3E%3Cuse href='%23f' transform='translate(300,150) rotate(-40)'/%3E%3Cuse href='%23f' transform='translate(120,200) rotate(35) scale(1.05)'/%3E%3Cuse href='%23f' transform='translate(230,280) rotate(-15) scale(.95)'/%3E%3Cuse href='%23f' transform='translate(70,320) rotate(60) scale(.9)'/%3E%3Cuse href='%23f' transform='translate(330,300) rotate(20) scale(.85)'/%3E%3Cuse href='%23l' transform='translate(150,320) rotate(-30)'/%3E%3Cuse href='%23l' transform='translate(190,150) rotate(15)'/%3E%3C/svg%3E");
-}
+:root{--tan:#d6b587;--blue:#b5c0c4;--cream:#f6f1e9;--ink:#4b4944;--white:#fff;--serif:'Playfair Display',Georgia,serif;--sans:'DM Sans',Arial,sans-serif;--script:'Great Vibes','Brush Script MT',cursive}
 
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -17,448 +6,148 @@ body{margin:0;color:var(--ink);font-family:var(--sans);background:var(--cream)}
 a{color:inherit;text-decoration:none}
 img{display:block;width:100%;height:100%;object-fit:cover}
 
-/* NAVIGATION */
-.nav{
-    height:76px;
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    z-index:10;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 6%;
-    color:#fff
-}
+.nav{height:76px;position:absolute;top:0;left:0;width:100%;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:0 6%;color:#fff}
 .logo{font:19px var(--serif);letter-spacing:.13em;text-align:center}
 .logo small{display:block;font:8px var(--sans);letter-spacing:.25em;margin-top:5px}
 .links{display:flex;gap:34px}
 .links a,.nav-cta{font-size:9px;letter-spacing:.15em}
 .menu{display:none}
 
-/* HERO */
-.hero{
-    height:100vh;
-    min-height:620px;
-    position:relative;
-    color:white;
-    display:grid;
-    place-items:center;
-    overflow:hidden
-}
+.hero{height:100vh;min-height:620px;position:relative;color:white;display:grid;place-items:center;overflow:hidden}
 .hero-photo,.hero-dim{position:absolute;inset:0}
 .hero-photo img{object-position:center 55%;transform:scale(1.12)}
 .hero-dim{background:rgba(27,32,36,.36)}
-.read-pill,.outline-pill{
-    border:1px solid rgba(255,255,255,.85);
-    border-radius:40px;
-    padding:12px 34px;
-    font-size:9px;
-    letter-spacing:.15em;
-    display:inline-block
-}
+.read-pill,.outline-pill{border:1px solid rgba(255,255,255,.85);border-radius:40px;padding:12px 34px;font-size:9px;letter-spacing:.15em;display:inline-block}
 .read-pill{position:absolute;top:7%;left:50%;transform:translateX(-50%)}
 .hero-center{position:relative;text-align:center;margin-top:15px}
-.hero .monogram{
-    display:block;
-    border:0;
-    padding:0;
-    margin:0 auto 6px;
-    font:400 60px/1.1 var(--script);
-    white-space:nowrap;
-    text-shadow:0 2px 14px rgba(0,0,0,.25)
-}
+.hero .monogram{display:block;border:0;padding:0;margin:0 auto 6px;font:400 60px/1.1 var(--script);white-space:nowrap;text-shadow:0 2px 14px rgba(0,0,0,.25)}
 .hero h1{font:clamp(30px,3.2vw,44px)/1.25 var(--serif);font-weight:400;margin:0 0 12px}
 .hero-center p{font:italic 16px/1.6 var(--serif);margin:0}
 .scroll-cue{position:absolute;bottom:16px;right:4%;font-size:22px}
 
-/* FLORAL BACKGROUNDS */
-.about-block,.story,footer{position:relative}
-.about-block>*,.story>*,footer>*{position:relative;z-index:1}
-
-footer::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    pointer-events:none;
-    -webkit-mask-image:var(--flowers);
-    mask-image:var(--flowers);
-    -webkit-mask-size:340px;
-    mask-size:340px;
-    -webkit-mask-repeat:repeat;
-    mask-repeat:repeat
-}
-
-/* ABOUT SECTION: tan background with a thin frame and two flower sprays.
-   --ut / --ub are the display size of one pixel of the original artwork for the
-   top-right and bottom-left sprays, so frame lines and flowers always line up. */
-.about-block{
-    --u:clamp(.5px,.06vw,.85px);
-    --ut:var(--u);
-    --ub:var(--u);
-    --fi:calc(var(--u)*60 + 6px);
-    --line:#3a3733;
-    --lw:max(1px,calc(var(--u)*2));
-    background:#d6b587;
-    padding:calc(var(--fi) + 60px) max(10%,calc(var(--fi) + var(--u)*134 + 30px)) calc(var(--fi) + 125px);
-    position:relative;
-    overflow:hidden;
-    isolation:isolate;
-}
-
-/* the frame lines (each side stops short where a flower spray crosses it) */
-.about-block::before{
-    content:"";
-    position:absolute;
-    inset:var(--fi);
-    pointer-events:none;
-    z-index:0;
-    background:
-        linear-gradient(var(--line),var(--line)) left top / calc(100% - var(--ut)*39.5) var(--lw) no-repeat,
-        linear-gradient(var(--line),var(--line)) left top / var(--lw) calc(100% - var(--ub)*290.5) no-repeat,
-        linear-gradient(var(--line),var(--line)) right bottom / calc(100% - var(--ub)*20) var(--lw) no-repeat,
-        linear-gradient(var(--line),var(--line)) right bottom / var(--lw) calc(100% - var(--ut)*284.5) no-repeat;
-}
-
-/* the two flower sprays: top right and bottom left of the frame */
-.about-block::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    pointer-events:none;
-    z-index:0;
-    background:
-        url("frame-flowers-top.png") right calc(var(--fi) - var(--ut)*30.5) top calc(var(--fi) - var(--ut)*13.5) / calc(var(--ut)*164) auto no-repeat,
-        url("frame-flowers-bottom.png") left calc(var(--fi) - var(--ub)*51) bottom calc(var(--fi) - var(--ub)*8.5) / calc(var(--ub)*158) auto no-repeat;
-}
-
-/* ABOUT CONTENT */
-.about-inner{
-    max-width:1040px;
-    margin:auto;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    align-items:center;
-    gap:12%
-}
+.about-block{background:var(--tan);padding:105px 10% 110px}
+.about-inner{max-width:1040px;margin:auto;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:12%}
 .portrait-wrap{position:relative;padding:0 12% 0 0}
-.portrait-arch{
-    height:450px;
-    overflow:hidden;
-    border-radius:0 48% 0 0
-}
-.portrait-arch.parallax{transform:none!important}
+.portrait-arch{height:450px;overflow:hidden;border-radius:0 48% 0 0}
 .portrait-arch img{object-position:center 35%;transform:scale(1.1)}
-
-.signature{
-    position:absolute;
-    bottom:-56px;
-    left:0;
-    color:#2b2926;
-    font:italic 32px var(--serif);
-    transform:rotate(-8deg)
-}
-.signature small{
-    display:block;
-    font:9px var(--sans);
-    letter-spacing:.2em;
-    text-align:center;
-    margin-top:3px
-}
+.signature{position:absolute;bottom:-22px;left:-30px;color:white;font:italic 32px var(--serif);transform:rotate(-8deg)}
+.signature small{display:block;font:9px var(--sans);letter-spacing:.2em;text-align:center;margin-top:3px}
 .tiny{font-size:9px;letter-spacing:.19em;margin:0 0 23px}
+.about-copy h2{font:clamp(29px,3vw,39px)/1.28 var(--serif);font-weight:400;margin:0 0 12px;color:white}
+.about-copy p:not(.tiny){font-size:12px;line-height:1.85;color:#fff;margin:12px 0}
+.about-copy .outline-pill{margin-top:15px;color:white}
 
-.about-copy .tiny{color:var(--ink)}
-.about-copy h2{
-    font:clamp(29px,3vw,39px)/1.28 var(--serif);
-    font-weight:400;
-    margin:0 0 12px;
-    color:var(--ink)
-}
-.about-copy p:not(.tiny){
-    font-size:12px;
-    line-height:1.85;
-    color:var(--ink);
-    margin:12px 0
-}
-.about-copy .outline-pill{
-    margin-top:15px;
-    color:var(--ink);
-    border-color:var(--ink)
-}
-
-/* STATEMENT */
-.statement{
-    position:relative;
-    background:var(--blue);
-    min-height:520px;
-    padding:0 8% 80px;
-    text-align:center;
-    overflow:hidden
-}
-.statement-photo{
-    height:280px;
-    width:min(58vw,620px);
-    margin:-1px auto 38px;
-    overflow:hidden;
-    border-radius:0 0 50% 50%
-}
+.statement{position:relative;background:var(--blue);min-height:520px;padding:0 8% 80px;text-align:center;overflow:hidden}
+.statement-photo{height:280px;width:min(58vw,620px);margin:-1px auto 38px;overflow:hidden;border-radius:0 0 50% 50%}
 .statement-photo img{transform:scale(1.12)}
-.statement h2{
-    font:clamp(29px,3.8vw,42px)/1.35 var(--serif);
-    font-weight:400;
-    color:white;
-    margin:0
-}
-.est{
-    position:absolute;
-    bottom:22px;
-    color:white;
-    font-size:9px;
-    font-weight:600;
-    letter-spacing:.2em
-}
+.statement h2{font:clamp(29px,3.8vw,42px)/1.35 var(--serif);font-weight:400;color:white;margin:0}
+.est{position:absolute;bottom:22px;color:white;font-size:9px;font-weight:600;letter-spacing:.2em}
 .est.left{left:14%}
 .est.right{right:14%}
 
-/* STORY */
-.story{
-    background:var(--cream);
-    padding:115px 10% 120px;
-    overflow:hidden
-}
+.story{background:var(--cream);padding:115px 10% 120px;overflow:hidden}
 .story-heading{text-align:center}
-.story-heading h2,.locations h2{
-    font:clamp(45px,6vw,72px)/1.05 var(--serif);
-    font-weight:400;
-    margin:0
-}
+.story-heading h2,.locations h2{font:clamp(45px,6vw,72px)/1.05 var(--serif);font-weight:400;margin:0}
 .story-heading h2 em,.locations h2 em{font-weight:400}
-.story-heading>p:last-child{
-    font-size:12px;
-    line-height:1.8;
-    color:#81796f;
-    max-width:440px;
-    margin:20px auto 0
-}
-.photo-scatter{
-    max-width:1000px;
-    margin:75px auto 55px;
-    position:relative;
-    height:660px
-}
+.story-heading>p:last-child{font-size:12px;line-height:1.8;color:#81796f;max-width:440px;margin:20px auto 0}
+
+.photo-scatter{max-width:1000px;margin:75px auto 55px;position:relative;height:660px}
 .photo-scatter figure{position:absolute;margin:0}
 .photo{overflow:hidden}
 .photo img{transform:scale(1.15)}
-.photo-scatter figcaption{
-    font-size:8px;
-    letter-spacing:.15em;
-    color:#837b70;
-    margin-top:12px
-}
+.photo-scatter figcaption{font-size:8px;letter-spacing:.15em;color:#837b70;margin-top:12px}
+
 .scatter-one{width:37%;left:3%;top:75px}
 .scatter-one .photo{height:370px}
+
 .scatter-two{width:43%;right:3%;top:0}
 .scatter-two .photo{height:440px}
 .scatter-two figcaption{text-align:left}
+
 .scatter-three{width:31%;left:35%;top:370px}
 .scatter-three .photo{height:280px}
 .scatter-three .photo img{
     transform:scale(1);
-    object-position:center center
-}
-.dark-pill{
-    border-color:#77736c;
-    color:var(--ink);
-    display:table;
-    margin:auto
+    object-position:center center;
 }
 
-/* LOCATIONS */
-.locations{
-    position:relative;
-    background:#e6ddd0;
-    padding:110px 0 125px;
-    text-align:center;
-    overflow:hidden
-}
+.dark-pill{border-color:#77736c;color:var(--ink);display:table;margin:auto}
+
+/* ---------- Locations: two auto-scrolling photo rows ---------- */
+.locations{background:#e6ddd0;padding:110px 0 125px;text-align:center;overflow:hidden}
 .locations-head{padding:0 10%}
 .locations h2{color:var(--ink)}
-.locations-intro{
-    font:italic 15px/1.7 var(--serif);
-    max-width:430px;
-    margin:20px auto 0;
-    color:#766f65
-}
-.marquee{
-    margin-top:65px;
-    overflow:hidden;
-    display:flex;
-    flex-direction:column;
-    gap:30px;
+.locations-intro{font:italic 15px/1.7 var(--serif);max-width:430px;margin:20px auto 0;color:#766f65}
+
+.marquee{margin-top:65px;overflow:hidden;display:flex;flex-direction:column;gap:30px;
     -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
-    mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)
-}
-.marquee-track{
-    display:flex;
-    width:max-content;
-    will-change:transform;
-    animation:marquee var(--dur,60s) linear infinite
-}
+    mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+/* --shift (minus one set's width) and --dur are set by script.js so every row loops seamlessly */
+.marquee-track{display:flex;width:max-content;will-change:transform;animation:marquee var(--dur,60s) linear infinite}
 .marquee-track.reverse{animation-direction:reverse}
-.marquee-set{
-    display:flex;
-    align-items:flex-start;
-    gap:24px;
-    padding-right:24px
-}
+.marquee-set{display:flex;align-items:flex-start;gap:24px;padding-right:24px}
 .tile{flex:none;width:250px;margin:0;text-align:left}
 .tile-img{height:300px;overflow:hidden}
 .tile figcaption{font-size:8px;letter-spacing:.15em;color:#837b70;margin-top:12px}
-@keyframes marquee{
-    from{transform:translate3d(0,0,0)}
-    to{transform:translate3d(var(--shift,0px),0,0)}
-}
+@keyframes marquee{from{transform:translate3d(0,0,0)}to{transform:translate3d(var(--shift,0px),0,0)}}
 
-/* CONTACT */
-.contact{
-    height:580px;
-    position:relative;
-    display:grid;
-    place-items:center;
-    text-align:center;
-    color:white;
-    overflow:hidden
-}
+.quote{background:#b5c0c4;text-align:center;padding:95px 15%}
+.quote blockquote{font:clamp(27px,3.5vw,42px)/1.35 var(--serif);color:white;margin:0 auto;max-width:800px}
+.quote small{display:block;font-size:8px;letter-spacing:.2em;color:white;margin-top:25px}
+
+.contact{height:580px;position:relative;display:grid;place-items:center;text-align:center;color:white;overflow:hidden}
 .contact-bg,.contact-overlay{position:absolute;inset:0}
 .contact-bg img{transform:scale(1.12)}
 .contact-overlay{background:rgba(35,38,36,.4)}
 .contact-copy{position:relative}
 .contact-copy .tiny{color:white}
-.contact h2{
-    font:clamp(48px,7vw,82px)/1.05 var(--serif);
-    font-weight:400;
-    margin:0
-}
-.contact-copy>p:not(.tiny){
-    font:italic 15px var(--serif);
-    margin:20px 0 28px
-}
+.contact h2{font:clamp(48px,7vw,82px)/1.05 var(--serif);font-weight:400;margin:0}
+.contact-copy>p:not(.tiny){font:italic 15px var(--serif);margin:20px 0 28px}
 
-/* FOOTER */
-footer{
-    background:var(--cream);
-    padding:40px 6% 25px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:20px;
-    text-align:center;
-    overflow:hidden
-}
-footer::before{background:#4b4944;opacity:.10}
+footer{background:var(--cream);padding:40px 6% 25px;display:flex;align-items:center;justify-content:space-between;gap:20px;text-align:center}
 footer .logo{font-size:17px}
-footer p,footer>div,footer>small{
-    font-size:8px;
-    letter-spacing:.14em;
-    color:#81796f
-}
+footer p,footer>div,footer>small{font-size:8px;letter-spacing:.14em;color:#81796f}
 footer>div{display:flex;gap:20px}
 
-/* MOBILE */
 @media(max-width:700px){
-    footer::before{
-        -webkit-mask-size:230px;
-        mask-size:230px
-    }
-
     .hero .monogram{font-size:44px}
     .nav{height:68px;padding:0 6%}
-    .menu{
-        display:block;
-        background:none;
-        border:0;
-        color:white;
-        font-size:22px
-    }
-    .links{
-        display:none;
-        position:absolute;
-        top:68px;
-        left:0;
-        right:0;
-        background:#bda078;
-        padding:25px 8%;
-        flex-direction:column;
-        gap:20px
-    }
+    .menu{display:block;background:none;border:0;color:white;font-size:22px}
+    .links{display:none;position:absolute;top:68px;left:0;right:0;background:#bda078;padding:25px 8%;flex-direction:column;gap:20px}
     .links.open{display:flex}
     .nav-cta{display:none}
     .hero{min-height:620px}
     .hero h1{font-size:32px}
     .hero-center p{font-size:14px}
-
-    /* Phone: keep the section its original size. The top flowers sit in the free
-       space to the right of the photo; the bottom ones in the bottom padding. */
-    .about-block{
-        --fi:14px;
-        --ut:.40px;
-        --ub:.24px;
-        padding:75px 8% 85px
-    }
-    .about-inner{
-        grid-template-columns:1fr;
-        gap:95px
-    }
+    .about-block{padding:75px 8% 85px}
+    .about-inner{grid-template-columns:1fr;gap:60px}
     .portrait-wrap{width:82%;margin:auto}
     .portrait-arch{height:390px}
     .about-copy{padding:0 3%}
     .about-copy h2{font-size:31px}
-
     .statement{min-height:440px;padding-bottom:65px}
-    .statement-photo{
-        width:85vw;
-        height:230px;
-        margin-bottom:32px
-    }
+    .statement-photo{width:85vw;height:230px;margin-bottom:32px}
     .statement h2{font-size:28px}
-
     .story{padding:85px 7% 90px}
-    .photo-scatter{
-        height:auto;
-        display:grid;
-        grid-template-columns:1fr 1fr;
-        gap:18px;
-        margin:45px auto
-    }
-    .photo-scatter figure{
-        position:relative!important;
-        inset:auto!important;
-        width:100%!important;
-        margin:0!important
-    }
+    .photo-scatter{height:auto;display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:45px auto}
+    .photo-scatter figure{position:relative!important;inset:auto!important;width:100%!important;margin:0!important}
     .photo-scatter .photo{height:240px!important}
     .scatter-two{margin-top:45px!important}
-    .scatter-three{
-        grid-column:1/-1;
-        width:75%!important;
-        margin:-10px auto 0!important
-    }
+    .scatter-three{grid-column:1/-1;width:75%!important;margin:-10px auto 0!important}
     .scatter-three .photo{height:280px!important}
-
     .locations{padding:85px 0 95px}
     .locations-head{padding:0 7%}
     .marquee{margin-top:45px;gap:22px}
     .marquee-set{gap:14px;padding-right:14px}
     .tile{width:170px}
     .tile-img{height:215px}
-
+    .quote{padding:80px 8%}
     .contact{height:500px}
     footer{flex-direction:column;padding:35px 6%}
     footer p{line-height:1.7}
 }
 
-/* REDUCED MOTION */
+/* Reduced-motion visitors: parallax drift stays off. The photo strip keeps running (slower, set in script.js). */
 @media(prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
     .parallax{transform:none!important}
