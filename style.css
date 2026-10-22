@@ -218,3 +218,19 @@ footer p,footer>div,footer>small{color:#5f5549}
  .locations::before{background-size:auto 220px,auto 220px;background-position:left -40px top,right -40px top}
  .contact::after{width:60px;height:100px;bottom:20px}
 }
+
+/* Keep the About portrait completely stationary */
+.about-block .portrait-arch,
+.about-block .portrait-arch img {
+    animation: none !important;
+    transition: none !important;
+}
+
+.about-block .portrait-arch {
+    transform: none !important;
+}
+
+.about-block .portrait-arch img {
+    transform: none !important;
+    object-position: center 35%;
+}

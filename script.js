@@ -1,103 +1,111 @@
-const menu=document.querySelector('.menu'),links=document.querySelector('.links');
 
-menu.addEventListener('click',()=>links.classList.toggle('open'));
+const menu = document.querySelector('.menu');
+const links = document.querySelector('.links');
 
-document.querySelectorAll('.links a').forEach(a=>
-  a.addEventListener('click',()=>links.classList.remove('open'))
-);
+menu.addEventListener('click', () => {
+  links.classList.toggle('open');
+});
 
-document.getElementById('year').textContent=new Date().getFullYear();
+document.querySelectorAll('.links a').forEach(a => {
+  a.addEventListener('click', () => links.classList.remove('open'));
+});
 
-// Parallax effect — excludes the entire About section.
-const layers=[...document.querySelectorAll('.parallax')]
-  .filter(el=>!el.closest('.about-block'));
+document.getElementById('year').textContent = new Date().getFullYear();
 
-const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+// Parallax effect — explicitly excludes the entire About section.
+const layers = [...document.querySelectorAll('.parallax')]
+  .filter(el => !el.closest('.about-block'));
 
-let ticking=false;
+const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-function updateParallax(){
-  if(reduce)return;
+let ticking = false;
 
-  const vh=window.innerHeight;
+function updateParallax() {
+  if (reduce) return;
 
-  for(const el of layers){
-    const r=el.getBoundingClientRect();
+  const vh = window.innerHeight;
 
-    if(r.bottom < -100 || r.top > vh+100) continue;
+  for (const el of layers) {
+    const r = el.getBoundingClientRect();
 
-    const speed=Number(el.dataset.speed||.12);
-    const center=(r.top+r.height/2-vh/2);
+    if (r.bottom < -100 || r.top > vh + 100) continue;
 
-    let shift=-center*speed;
+    const speed = Number(el.dataset.speed || .12);
+    const center = (r.top + r.height / 2 - vh / 2);
 
-    if(el.classList.contains('parallax-lock')){
-      shift=Math.min(shift,0);
+    let shift = -center * speed;
+
+    // Keep the parallax-lock behavior for the statement section.
+    if (el.classList.contains('parallax-lock')) {
+      shift = Math.min(shift, 0);
     }
 
-    el.style.transform=`translate3d(0,${shift.toFixed(1)}px,0)`;
+    el.style.transform = `translate3d(0,${shift.toFixed(1)}px,0)`;
   }
 
-  ticking=false;
+  ticking = false;
 }
 
-window.addEventListener('scroll',()=>{
-  if(!ticking){
+window.addEventListener('scroll', () => {
+  if (!ticking) {
     requestAnimationFrame(updateParallax);
-    ticking=true;
+    ticking = true;
   }
-},{passive:true});
+}, { passive: true });
 
-window.addEventListener('resize',updateParallax);
+window.addEventListener('resize', updateParallax);
 updateParallax();
 
 // Seamless auto-scrolling photo strips.
-const marqueeTracks=[...document.querySelectorAll('.marquee-track')];
+const marqueeTracks = [...document.querySelectorAll('.marquee-track')];
 
-const marqueeSpeedFactor=reduce?0.6:1;
+const marqueeSpeedFactor = reduce ? 0.6 : 1;
 
-function buildMarquee(){
-  for(const track of marqueeTracks){
-    const original=track.querySelector('.marquee-set:not(.clone)');
+function buildMarquee() {
+  for (const track of marqueeTracks) {
+    const original = track.querySelector('.marquee-set:not(.clone)');
 
-    if(!original)continue;
+    if (!original) continue;
 
-    track.querySelectorAll('.marquee-set.clone').forEach(c=>c.remove());
+    track.querySelectorAll('.marquee-set.clone').forEach(c => c.remove());
 
-    const w=original.offsetWidth;
+    const w = original.offsetWidth;
 
-    if(!w)continue;
+    if (!w) continue;
 
-    const speed=Number(track.dataset.speed||40)*marqueeSpeedFactor;
-    const copies=Math.ceil(window.innerWidth/w)+1;
+    const speed = Number(track.dataset.speed || 40) * marqueeSpeedFactor;
+    const copies = Math.ceil(window.innerWidth / w) + 1;
 
-    for(let i=0;i<copies;i++){
-      const c=original.cloneNode(true);
+    for (let i = 0; i < copies; i++) {
+      const c = original.cloneNode(true);
 
       c.classList.add('clone');
-      c.setAttribute('aria-hidden','true');
+      c.setAttribute('aria-hidden', 'true');
 
-      c.querySelectorAll('img').forEach(img=>img.alt='');
+      c.querySelectorAll('img').forEach(img => img.alt = '');
 
       track.appendChild(c);
     }
 
-    track.style.setProperty('--shift',(-w)+'px');
-    track.style.setProperty('--dur',(w/speed).toFixed(1)+'s');
+    track.style.setProperty('--shift', (-w) + 'px');
+    track.style.setProperty('--dur', (w / speed).toFixed(1) + 's');
   }
 }
 
 buildMarquee();
 
-window.addEventListener('load',buildMarquee);
+// Rebuild after images and fonts load.
+window.addEventListener('load', buildMarquee);
 
-let lastW=window.innerWidth,marqueeTimer;
+// Only rebuild when the screen width changes.
+let lastW = window.innerWidth;
+let marqueeTimer;
 
-window.addEventListener('resize',()=>{
-  if(window.innerWidth===lastW)return;
+window.addEventListener('resize', () => {
+  if (window.innerWidth === lastW) return;
 
-  lastW=window.innerWidth;
+  lastW = window.innerWidth;
 
   clearTimeout(marqueeTimer);
-  marqueeTimer=setTimeout(buildMarquee,200);
+  marqueeTimer = setTimeout(buildMarquee, 200);
 });
