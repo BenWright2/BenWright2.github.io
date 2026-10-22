@@ -155,7 +155,7 @@ footer>div{display:flex;gap:20px}
 
 /* ===== REALISTIC NATURE THEME v3: readable text, a different botanical for each section ===== */
 :root{--cream:#efe3d1;--ink:#4a4339;--paper:url("data:image/svg+xml,%3Csvg xmlns='http\://www\.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='a'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' seed='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .42 0 0 0 0 .33 0 0 0 0 .22 0 0 0 .5 -.16'/%3E%3C/filter%3E%3Cfilter id='b'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.006' numOctaves='3' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 .97 0 0 0 0 .92 0 0 0 1.6 -.55'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23a)' opacity='.26'/%3E%3Crect width='400' height='400' filter='url(%23b)' opacity='.3'/%3E%3C/svg%3E");--fl:url("floral-left.png");--fr:url("floral-right.png");--sr:url("sprig-white.svg");
-  --wl:url("floral-wheat-left.svg?v=2");--wr:url("floral-wheat-right.svg?v=2");--ml:url("floral-meadow-left.svg?v=2");--mr:url("floral-meadow-right.svg?v=2");--el:url("floral-eucalyptus-left.svg?v=2");--er:url("floral-eucalyptus-right.svg?v=2");
+  --wl:url("floral-wheat-left-sharp.svg");--wr:url("floral-wheat-right-sharp.svg");--ml:url("floral-meadow-left-sharp.svg");--mr:url("floral-meadow-right-sharp.svg");--el:url("floral-eucalyptus-left-sharp.svg");--er:url("floral-eucalyptus-right-sharp.svg");
   --lvl:url("floral-lavender-left.svg");--lvr:url("floral-lavender-right.svg");--ptl:url("floral-petals-left.svg");--ptr:url("floral-petals-right.svg")}
 body{background:var(--cream)}
 
@@ -222,7 +222,7 @@ footer p,footer>div,footer>small{color:#5f5549}
  .portrait-arch{height:320px}
  .signature{left:-34px;font-size:46px}
  .statement{padding-bottom:185px}
- .statement::before{background-size:auto 150px,auto 150px;background-position:left 0 bottom 0,right 0 bottom 0}
+ .statement::before{background-size:auto 240px,auto 240px;background-position:left 0 bottom 0,right 0 bottom 0}
  .story::before{background-position:left -8px bottom 0,right -8px bottom 0,left -8px top 2%,right -8px top 2%;background-size:auto 130px,auto 130px,auto 170px,auto 170px}
  .locations::before{background-size:auto 200px,auto 200px;background-position:left -8px top,right -8px top}
  .contact::after{width:60px;height:100px;bottom:20px}
