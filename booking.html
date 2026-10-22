@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Booking Inquiry — Captured by Emma</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css?v=10">
+</head>
+
+<body class="booking-page">
+
+  <header class="booking-header">
+    <a class="booking-logo" href="index.html">
+      Emma Sanders
+      <small>Captured by Emma</small>
+    </a>
+
+    <a class="booking-back" href="index.html">← BACK TO HOME</a>
+  </header>
+
+  <main class="booking-main">
+
+    <div class="booking-intro">
+      <p class="tiny">LET'S MAKE SOMETHING MEANINGFUL</p>
+
+      <h1>Let's get to know<br><em>your story.</em></h1>
+
+      <p>
+        I'm so glad you're here! Tell me a little about what you're
+        dreaming up, and I'll be in touch soon.
+      </p>
+    </div>
+
+    <form class="booking-form" id="booking-form">
+
+      <!-- THE BASICS -->
+      <div class="form-section">
+        <p class="form-section-label">01 — THE BASICS</p>
+
+        <div class="form-grid">
+
+          <div class="form-field">
+            <label for="name">Your Name <span>*</span></label>
+            <input type="text" id="name" name="Name" placeholder="Your full name" required>
+          </div>
+
+          <div class="form-field">
+            <label for="email">Email Address <span>*</span></label>
+            <input type="email" id="email" name="Email" placeholder="you@example.com" required>
+          </div>
+
+          <div class="form-field">
+            <label for="phone">Phone Number <span>*</span></label>
+            <input type="tel" id="phone" name="Phone" placeholder="(000) 000-0000" required>
+          </div>
+
+          <div class="form-field">
+            <label for="location">General Location <span>*</span></label>
+            <input type="text" id="location" name="Location" placeholder="City, state, or venue" required>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PREFERRED DATES -->
+      <div class="form-section">
+        <p class="form-section-label">02 — THE DATE</p>
+
+        <h2>When are you thinking?</h2>
+
+        <p class="form-help">
+          Choose your preferred date or add a few options if you're flexible.
+        </p>
+
+        <div id="date-list">
+
+          <div class="date-entry">
+            <input
+              type="date"
+              name="Preferred Dates"
+              class="preferred-date"
+              aria-label="Preferred date"
+              required
+            >
+          </div>
+
+        </div>
+
+        <button type="button" class="add-date" id="add-date">
+          + ADD ANOTHER DATE
+        </button>
+      </div>
+
+      <!-- ADDITIONAL DETAILS -->
+      <div class="form-section">
+        <p class="form-section-label">03 — A LITTLE MORE</p>
+
+        <div class="form-field">
+          <label for="source">How did you hear about me? <span>*</span></label>
+
+          <select id="source" name="How did you hear about me" required>
+            <option value="" disabled selected>Select an option</option>
+            <option value="Instagram">Instagram</option>
+            <option value="Facebook">Facebook</option>
+            <option value="Google">Google</option>
+            <option value="Word of mouth">Word of mouth / Referral</option>
+            <option value="Previous client">Previous client</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-field details-field">
+          <label for="details">Tell me a little about what you have in mind</label>
+
+          <textarea
+            id="details"
+            name="Details"
+            rows="6"
+            placeholder="What are you celebrating? What kind of session are you interested in? Any details you'd like me to know..."
+          ></textarea>
+        </div>
+      </div>
+
+      <!-- SUBMIT -->
+      <div class="booking-submit">
+        <p>Thank you for considering Captured by Emma. I can't wait to hear from you!</p>
+
+        <button type="submit" class="booking-submit-button">
+          SEND INQUIRY →
+        </button>
+
+        <small>* Required fields</small>
+      </div>
+
+    </form>
+
+    <!-- THANK YOU MESSAGE -->
+    <div id="thank-you" class="thank-you-message" hidden>
+      <p class="tiny">THANK YOU</p>
+      <h2>Your story starts here.</h2>
+      <p>Your inquiry has been completed. I'll look forward to connecting with you!</p>
+      <a href="index.html" class="outline-pill dark-pill">BACK TO HOME</a>
+    </div>
+
+  </main>
+
+  <footer class="booking-footer">
+    <a class="booking-logo" href="index.html">
+      Emma Sanders
+      <small>Captured by Emma</small>
+    </a>
+
+    <p>BUFFALO, NEW YORK</p>
+
+    <small>© <span id="year"></span> Captured by Emma</small>
+  </footer>
+
+  <script>
+    // Update footer year.
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Get today's date in local time.
+    const today = new Date();
+
+    const localToday = new Date(
+      today.getTime() - today.getTimezoneOffset() * 60000
+    ).toISOString().split("T")[0];
+
+    // Prevent selecting dates in the past.
+    document.querySelectorAll(".preferred-date").forEach(input => {
+      input.min = localToday;
+    });
+
+    // Add additional preferred dates.
+    const dateList = document.getElementById("date-list");
+    const addDateButton = document.getElementById("add-date");
+
+    addDateButton.addEventListener("click", () => {
+      const entry = document.createElement("div");
+      entry.className = "date-entry";
+
+      const input = document.createElement("input");
+      input.type = "date";
+      input.name = "Preferred Dates";
+      input.className = "preferred-date";
+      input.setAttribute("aria-label", "Additional preferred date");
+      input.min = localToday;
+
+      const removeButton = document.createElement("button");
+      removeButton.type = "button";
+      removeButton.className = "remove-date";
+      removeButton.textContent = "REMOVE";
+      removeButton.setAttribute("aria-label", "Remove this date");
+
+      removeButton.addEventListener("click", () => {
+        entry.remove();
+      });
+
+      entry.append(input, removeButton);
+      dateList.appendChild(entry);
+    });
+
+    // Send the inquiry by email (via FormSubmit) and show the thank-you message.
+    const bookingForm = document.getElementById("booking-form");
+    const submitButton = bookingForm.querySelector(".booking-submit-button");
+    const thankYou = document.getElementById("thank-you");
+
+    const errorMessage = document.createElement("p");
+    errorMessage.className = "form-help";
+    errorMessage.setAttribute("role", "alert");
+    errorMessage.hidden = true;
+    errorMessage.textContent =
+      "Sorry, something went wrong sending your inquiry. Please try again in a moment.";
+    submitButton.insertAdjacentElement("beforebegin", errorMessage);
+
+    bookingForm.addEventListener("submit", async function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+
+      if (!bookingForm.reportValidity()) return;
+
+      errorMessage.hidden = true;
+      submitButton.disabled = true;
+      const originalLabel = submitButton.textContent;
+      submitButton.textContent = "SENDING...";
+
+      // Collect the fields, combining every preferred date into one line.
+      const data = new FormData(bookingForm);
+      const dates = data.getAll("Preferred Dates").filter(Boolean);
+      data.delete("Preferred Dates");
+      data.set("Preferred Dates", dates.join(", "));
+
+      // FormSubmit options.
+      data.set("_subject", "New booking inquiry — Captured by Emma");
+      data.set("_template", "table");
+      data.set("_captcha", "false");
+      data.set("_replyto", bookingForm.elements["Email"].value);
+
+      try {
+        const response = await fetch("https://formsubmit.co/ajax/be078366243f27d2cad0f4f7a2c59f19", {
+          method: "POST",
+          headers: { "Accept": "application/json" },
+          body: data
+        });
+
+        const result = await response.json();
+
+        if (!response.ok || String(result.success) !== "true") {
+          throw new Error(result.message || "Send failed");
+        }
+
+        bookingForm.hidden = true;
+        thankYou.hidden = false;
+        thankYou.scrollIntoView({ behavior: "smooth", block: "center" });
+      } catch (err) {
+        console.error(err);
+        errorMessage.hidden = false;
+        submitButton.disabled = false;
+        submitButton.textContent = originalLabel;
+      }
+    });
+  </script>
+
+</body>
+</html>
