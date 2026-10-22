@@ -251,31 +251,17 @@
         "_replyto": form.get("Email")
       };
 
-      // Send the email. FormSubmit can be slow to reply, so we only wait a
-      // couple of seconds before showing the thank-you message. The request
-      // keeps going in the background, and if it eventually fails the form
-      // comes back with an error so nothing is silently lost.
-      const controller = new AbortController();
-      const abortTimer = setTimeout(() => controller.abort(), 30000);
-
+      // Send the email. FormSubmit delivers the message but its reply can be
+      // slow and the browser sometimes blocks us from reading it, which used to
+      // trigger a false "something went wrong". So we send in "no-cors" mode:
+      // we don't read the reply, and only treat a real network failure
+      // (offline, request blocked) as an error.
       const sendPromise = fetch("https://formsubmit.co/ajax/be078366243f27d2cad0f4f7a2c59f19", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json"
-        },
-        body: JSON.stringify(payload),
-        keepalive: true,
-        signal: controller.signal
-      }).then(async response => {
-        let result = {};
-        try { result = await response.json(); } catch (e) { /* non-JSON reply */ }
-        console.log("FormSubmit response:", response.status, result);
-
-        if (!response.ok || String(result.success) === "false") {
-          throw new Error(result.message || ("HTTP " + response.status));
-        }
-      }).finally(() => clearTimeout(abortTimer));
+        mode: "no-cors",
+        body: new URLSearchParams(payload),
+        keepalive: true
+      });
 
       function showThankYou() {
         bookingForm.hidden = true;
