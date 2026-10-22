@@ -1,3 +1,4 @@
+
 :root{--tan:#d6b587;--blue:#b5c0c4;--cream:#f6f1e9;--ink:#4b4944;--white:#fff;--serif:'Playfair Display',Georgia,serif;--sans:'DM Sans',Arial,sans-serif;--script:'Great Vibes','Brush Script MT',cursive}
 
 *{box-sizing:border-box}
@@ -151,4 +152,69 @@ footer>div{display:flex;gap:20px}
 @media(prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
     .parallax{transform:none!important}
+}
+
+/* ===== REALISTIC NATURE THEME v3: readable text, a different botanical for each section ===== */
+:root{--cream:#efe3d1;--ink:#4a4339;--paper:url("data:image/svg+xml,%3Csvg xmlns='http\://www\.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='a'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' seed='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .42 0 0 0 0 .33 0 0 0 0 .22 0 0 0 .5 -.16'/%3E%3C/filter%3E%3Cfilter id='b'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.006' numOctaves='3' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 .97 0 0 0 0 .92 0 0 0 1.6 -.55'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23a)' opacity='.26'/%3E%3Crect width='400' height='400' filter='url(%23b)' opacity='.3'/%3E%3C/svg%3E");--fl:url("floral-left.png");--fr:url("floral-right.png");--sr:url("sprig-white.svg");
+  --wl:url("floral-wheat-left.svg");--wr:url("floral-wheat-right.svg");--ml:url("floral-meadow-left.svg");--mr:url("floral-meadow-right.svg");--el:url("floral-eucalyptus-left.svg");--er:url("floral-eucalyptus-right.svg");
+  --lvl:url("floral-lavender-left.svg");--lvr:url("floral-lavender-right.svg");--ptl:url("floral-petals-left.svg");--ptr:url("floral-petals-right.svg")}
+body{background:var(--cream)}
+
+.about-block,.statement,.story,.locations,footer{position:relative;isolation:isolate;overflow:hidden}
+.about-block::before,.statement::before,.story::before,.locations::before,footer::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background-repeat:no-repeat}
+
+/* a soft wash over the middle keeps every word on a plain background; flowers only show at the edges */
+.statement::after,.story::after,.locations::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(90deg,transparent 0,rgba(var(--vr),.96) 20%,rgba(var(--vr),.96) 80%,transparent 100%)}
+
+/* ABOUT: peonies (only here) */
+.about-block{background:var(--paper),#f0e5d4;padding:90px max(10%,14vw) 95px}
+.about-block::before{background-image:var(--fl),var(--fr);background-position:left top,right top;background-size:auto min(100%,26vw),auto min(100%,26vw)}
+.portrait-arch{height:410px;border-radius:999px 999px 0 0;box-shadow:0 0 0 6px rgba(255,252,245,.6),0 0 0 7px rgba(176,146,118,.4)}
+.signature{left:-46px;bottom:-12px;color:#3f382f;font:400 56px/1 var(--script);transform:rotate(-4deg)}
+.signature small{font:9px var(--sans);letter-spacing:.2em;margin-top:6px;text-align:left;padding-left:34px;transform:rotate(4deg);color:#3f382f}
+.about-copy .tiny{color:#4a4339}
+.about-copy h2{color:#3a342b;font-size:clamp(26px,2.4vw,34px);line-height:1.3}
+.about-copy p:not(.tiny){color:#4a4339;font-size:13px}
+.about-copy .outline-pill{color:#3a342b;border-color:#3a342b}
+.about-copy .outline-pill::after{content:"\2192";margin-left:10px}
+
+/* STATEMENT: golden wheat and grasses */
+.statement{--vr:232,218,195;background:var(--paper),#e8dac3}
+.statement::before{background-image:var(--wl),var(--wr);background-position:left 1% bottom,right 1% bottom;background-size:auto min(96%,24vw),auto min(96%,24vw)}
+.statement h2{color:#3a342b}
+.est{color:#5f5549}
+
+/* STORY: soft lavender at the bottom corners + a few drifting petals up top */
+.story{--vr:239,227,209;background:var(--paper),var(--cream)}
+.story::before{background-image:var(--lvl),var(--lvr),var(--ptl),var(--ptr);background-position:left -14px bottom 0,right -14px bottom 0,left 1% top 4%,right 1% top 4%;background-size:auto min(32%,427px),auto min(32%,427px),auto 230px,auto 230px}
+.story::after{background:linear-gradient(90deg,transparent 0,rgba(var(--vr),.96) 17%,rgba(var(--vr),.96) 83%,transparent 100%)}
+.story-heading>p:last-child{color:#5f5549}
+.photo-scatter figcaption,.tile figcaption{color:#5f5549}
+.dark-pill{border-color:#4a4339;color:#3a342b}
+
+/* LOCATIONS: eucalyptus branches hanging from the top corners */
+.locations{--vr:234,220,199;background:var(--paper),#eadcc7}
+.locations::before{background-image:var(--el),var(--er);background-position:left -10px top,right -10px top;background-size:auto 340px,auto 340px}
+.locations-intro{color:#524839}
+
+/* CONTACT: golden-hour tint over the photo, one white sprig */
+.contact-overlay{background:linear-gradient(rgba(70,46,22,.28),rgba(52,34,16,.52))}
+.contact::after{content:"";position:absolute;right:7%;bottom:28px;width:90px;height:150px;z-index:0;pointer-events:none;background:var(--sr) no-repeat center/contain}
+.contact-copy{z-index:1}
+
+footer{background:var(--paper),var(--cream)}
+footer::before{background-image:var(--ml),var(--mr);background-position:left -20px bottom -60px,right -20px bottom -60px;background-size:auto 260px,auto 260px}
+footer p,footer>div,footer>small{color:#5f5549}
+
+@media(max-width:700px){
+ .statement::after,.story::after,.locations::after{background:linear-gradient(90deg,transparent 0,rgba(var(--vr),.96) 13%,rgba(var(--vr),.96) 87%,transparent 100%)}
+ .about-block{padding:75px 8% 85px}
+ .about-block::before{background-position:left -90px top 20px,right -90px top 40px;background-size:auto 300px,auto 300px}
+ .portrait-wrap{width:62%;padding:0}
+ .portrait-arch{height:320px}
+ .signature{left:-34px;font-size:46px}
+ .statement::before{background-size:auto 70%,auto 70%;background-position:left -40px bottom,right -40px bottom}
+ .story::before{background-position:left -60px bottom 0,right -60px bottom 0,left -30px top 2%,right -30px top 2%;background-size:auto 224px,auto 224px,auto 170px,auto 170px}
+ .locations::before{background-size:auto 220px,auto 220px;background-position:left -40px top,right -40px top}
+ .contact::after{width:60px;height:100px;bottom:20px}
 }
