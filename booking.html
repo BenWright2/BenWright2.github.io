@@ -295,10 +295,12 @@
       if (firstResult === "sent") {
         showThankYou();
       } else if (firstResult === waitedLong) {
-        // Still waiting on FormSubmit: show the thank-you now, and bring the
-        // form back only if the send ends up failing.
+        // Still waiting on FormSubmit: show the thank-you now and leave it up.
+        // Browsers sometimes cancel a slow request after the email has already
+        // gone out (for example when the visitor switches tabs), so a late
+        // failure is only logged and never brings the form back.
         showThankYou();
-        sendPromise.catch(showError);
+        sendPromise.catch(err => console.warn("Late send warning (ignored):", err));
       } else {
         showError(firstResult.err);
       }
