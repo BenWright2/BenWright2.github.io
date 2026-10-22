@@ -1,4 +1,3 @@
-
 :root{--tan:#d6b587;--blue:#b5c0c4;--cream:#f6f1e9;--ink:#4b4944;--white:#fff;--serif:'Playfair Display',Georgia,serif;--sans:'DM Sans',Arial,sans-serif;--script:'Great Vibes','Brush Script MT',cursive}
 
 *{box-sizing:border-box}
@@ -207,15 +206,20 @@ footer::before{background-image:var(--ml),var(--mr);background-position:left -20
 footer p,footer>div,footer>small{color:#5f5549}
 
 @media(max-width:700px){
- .statement::after,.story::after,.locations::after{background:linear-gradient(90deg,transparent 0,rgba(var(--vr),.96) 13%,rgba(var(--vr),.96) 87%,transparent 100%)}
+ /* Phone: no cream fog over the botanicals (it made them look blurry).
+    Instead the flower layer itself fades out toward the middle, so text stays clear. */
+ .statement::after,.story::after,.locations::after{background:none}
+ .statement::before,.story::before,.locations::before{
+   -webkit-mask-image:linear-gradient(90deg,#000 0,#000 18%,transparent 29%,transparent 71%,#000 82%,#000 100%);
+           mask-image:linear-gradient(90deg,#000 0,#000 18%,transparent 29%,transparent 71%,#000 82%,#000 100%)}
  .about-block{padding:75px 8% 85px}
  .about-block::before{background-position:left -90px top 20px,right -90px top 40px;background-size:auto 300px,auto 300px}
  .portrait-wrap{width:62%;padding:0}
  .portrait-arch{height:320px}
  .signature{left:-34px;font-size:46px}
- .statement::before{background-size:auto 70%,auto 70%;background-position:left -40px bottom,right -40px bottom}
- .story::before{background-position:left -60px bottom 0,right -60px bottom 0,left -30px top 2%,right -30px top 2%;background-size:auto 224px,auto 224px,auto 170px,auto 170px}
- .locations::before{background-size:auto 220px,auto 220px;background-position:left -40px top,right -40px top}
+ .statement::before{background-size:auto 70%,auto 70%;background-position:left -8px bottom,right -8px bottom}
+ .story::before{background-position:left -8px bottom 0,right -8px bottom 0,left -8px top 2%,right -8px top 2%;background-size:auto 250px,auto 250px,auto 170px,auto 170px}
+ .locations::before{background-size:auto 250px,auto 250px;background-position:left -8px top,right -8px top}
  .contact::after{width:60px;height:100px;bottom:20px}
 }
 
@@ -578,4 +582,3 @@ footer p,footer>div,footer>small{color:#5f5549}
 .thank-you-message[hidden] {
     display: none;
 }
-
