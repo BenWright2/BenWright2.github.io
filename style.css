@@ -209,17 +209,23 @@ footer p,footer>div,footer>small{color:#5f5549}
  /* Phone: no cream fog over the botanicals (it made them look blurry).
     Instead the flower layer itself fades out toward the middle, so text stays clear. */
  .statement::after,.story::after,.locations::after{background:none}
- .statement::before,.story::before,.locations::before{
+ /* Story keeps its soft side fade (petals); lavender is a small sprig level with the gallery button */
+ .story::before{
    -webkit-mask-image:linear-gradient(90deg,#000 0,#000 18%,transparent 29%,transparent 71%,#000 82%,#000 100%);
            mask-image:linear-gradient(90deg,#000 0,#000 18%,transparent 29%,transparent 71%,#000 82%,#000 100%)}
+ /* Wheat + eucalyptus: crisp (no fade, no fog), hard-cropped so they only peek in from the sides */
+ .statement::before{
+   clip-path:polygon(0 0,22px 0,22px 100%,calc(100% - 22px) 100%,calc(100% - 22px) 0,100% 0,100% 100%,0 100%)}
+ .locations::before{
+   clip-path:polygon(0 0,22% 0,22% 100%,78% 100%,78% 0,100% 0,100% 100%,0 100%)}
  .about-block{padding:75px 8% 85px}
  .about-block::before{background-position:left -90px top 20px,right -90px top 40px;background-size:auto 300px,auto 300px}
  .portrait-wrap{width:62%;padding:0}
  .portrait-arch{height:320px}
  .signature{left:-34px;font-size:46px}
  .statement::before{background-size:auto 70%,auto 70%;background-position:left -8px bottom,right -8px bottom}
- .story::before{background-position:left -8px bottom 0,right -8px bottom 0,left -8px top 2%,right -8px top 2%;background-size:auto 250px,auto 250px,auto 170px,auto 170px}
- .locations::before{background-size:auto 250px,auto 250px;background-position:left -8px top,right -8px top}
+ .story::before{background-position:left -8px bottom 0,right -8px bottom 0,left -8px top 2%,right -8px top 2%;background-size:auto 130px,auto 130px,auto 170px,auto 170px}
+ .locations::before{background-size:auto 200px,auto 200px;background-position:left -8px top,right -8px top}
  .contact::after{width:60px;height:100px;bottom:20px}
 }
 
