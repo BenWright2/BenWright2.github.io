@@ -42,7 +42,7 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 .statement-photo img{transform:scale(1.12)}
 .statement h2{font:clamp(29px,3.8vw,42px)/1.35 var(--serif);font-weight:400;color:white;margin:0}
 .est{position:absolute;bottom:22px;color:white;font-size:9px;font-weight:600;letter-spacing:.2em}
-.est.left{left:14%}
+.est.left{left:15.5%}
 .est.right{right:14%}
 
 .story{background:var(--cream);padding:115px 10% 120px;overflow:hidden}
@@ -62,7 +62,7 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 
 .scatter-two{width:43%;right:3%;top:0}
 .scatter-two .photo{height:440px}
-.scatter-two figcaption{text-align:left}
+.scatter-two figcaption{text-align:right}
 
 .scatter-three{width:31%;left:35%;top:370px}
 .scatter-three .photo{height:280px}
