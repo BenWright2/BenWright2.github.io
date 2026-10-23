@@ -593,3 +593,7 @@ footer .social{display:flex;align-items:center;gap:14px}
 footer .social a{display:inline-flex;padding:6px;color:#5f5549;transition:color .2s,transform .2s}
 footer .social a:hover{color:#3a342b;transform:translateY(-2px)}
 footer .social svg{width:20px;height:20px;display:block}
+/* Nav logo image */
+.nav .logo-img{align-self:flex-start;margin-top:14px;line-height:0}
+.nav .logo-img img{display:block;height:92px;width:auto}
+@media (max-width:760px){.nav .logo-img{margin-top:10px}.nav .logo-img img{height:68px}}
