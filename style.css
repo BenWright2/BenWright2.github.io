@@ -587,3 +587,9 @@ footer p,footer>div,footer>small{color:#5f5549}
 .thank-you-message[hidden] {
     display: none;
 }
+
+/* Footer social icons */
+footer .social{display:flex;align-items:center;gap:14px}
+footer .social a{display:inline-flex;padding:6px;color:#5f5549;transition:color .2s,transform .2s}
+footer .social a:hover{color:#3a342b;transform:translateY(-2px)}
+footer .social svg{width:20px;height:20px;display:block}
